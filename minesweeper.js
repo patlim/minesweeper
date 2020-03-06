@@ -72,7 +72,6 @@ function boardCreator() {
     //size 2 = 2x2, 3 = 3x3 and so on
     size = document.getElementById("boardSize").value
     difficulty = document.getElementById("difficulty").value
-    difficulty = .7
     var board = {}
     board.cells = []
     var index = 0
