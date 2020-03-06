@@ -1,77 +1,103 @@
-document.addEventListener('DOMContentLoaded', startGame)
+// document.addEventListener('DOMContentLoaded', startGame)
+// // Define your `board` object here!
+// var board = {
+//     cells: [
+//         {
+//             row: 0,
+//             col: 0,
+//             isMine: false,
+//             hidden: true,
+//             isMarked: false
+//         },
+//         {
+//             row: 0,
+//             col: 1,
+//             isMine: true,
+//             hidden: true,
+//             isMarked: false
+//         },
+//         {
+//             row: 0,
+//             col: 2,
+//             isMine: false,
+//             hidden: true,
+//             isMarked: false
+//         },
+//         {
+//             row: 1,
+//             col: 0,
+//             isMine: false,
+//             hidden: true,
+//             isMarked: false
+//         },
+//         {
+//             row: 1,
+//             col: 1,
+//             isMine: false,
+//             hidden: true,
+//             isMarked: false
+//         },
+//         {
+//             row: 1,
+//             col: 2,
+//             isMine: false,
+//             hidden: true,
+//             isMarked: false
+//         },
+//         {
+//             row: 2,
+//             col: 0,
+//             isMine: true,
+//             hidden: true,
+//             isMarked: false
+//         },
+//         {
+//             row: 2,
+//             col: 1,
+//             isMine: false,
+//             hidden: true,
+//             isMarked: false
+//         },
+//         {
+//             row: 2,
+//             col: 2,
+//             isMine: true,
+//             hidden: true,
+//             isMarked: false
+//         },
+//     ]
+// }
 
-// Define your `board` object here!
-var board = {
-    cells: [
-        {
-            row: 0,
-            col: 0,
-            isMine: false,
-            hidden: true,
-            isMarked: false
-        },
-        {
-            row: 0,
-            col: 1,
-            isMine: true,
-            hidden: true,
-            isMarked: false
-        },
-        {
-            row: 0,
-            col: 2,
-            isMine: false,
-            hidden: true,
-            isMarked: false
-        },
-        {
-            row: 1,
-            col: 0,
-            isMine: false,
-            hidden: true,
-            isMarked: false
-        },
-        {
-            row: 1,
-            col: 1,
-            isMine: false,
-            hidden: true,
-            isMarked: false
-        },
-        {
-            row: 1,
-            col: 2,
-            isMine: false,
-            hidden: true,
-            isMarked: false
-        },
-        {
-            row: 2,
-            col: 0,
-            isMine: true,
-            hidden: true,
-            isMarked: false
-        },
-        {
-            row: 2,
-            col: 1,
-            isMine: false,
-            hidden: true,
-            isMarked: false
-        },
-        {
-            row: 2,
-            col: 2,
-            isMine: true,
-            hidden: true,
-            isMarked: false
-        },
-    ]
+function boardCreator() {
+    //size 2 = 2x2, 3 = 3x3 and so on
+    size = document.getElementById("boardSize").value
+    difficulty = document.getElementById("difficulty").value
+    difficulty = .7
+    var board = {}
+    board.cells = []
+    var index = 0
+    for (i = 0 ; i < size ; i++) {
+        for (j = 0 ; j < size ; j++) {
+            board.cells[index] = {};
+            board.cells[index].row = i;
+            board.cells[index].col = j;
+            board.cells[index].isMine = (Math.random() > difficulty);
+            board.cells[index].hidden = true;
+            board.cells[index].isMarked = false;
+            index++
+        }
+    }
+    return(board)
 }
 
-function startGame () {
-  // Don't remove this function call: it makes the game work!
+function initiate() {
+    board = boardCreator()
+    startGame()
+    document.getElementById('startButton').createAttribute('disabled')
+}
 
+function startGame() {
+  // Don't remove this function call: it makes the game work!
   for (i=0 ; i<board.cells.length ; i++) {
       board.cells[i].surroundingMines = countSurroundingMines(board.cells[i])
   }
