@@ -80,7 +80,7 @@ function boardCreator() {
             board.cells[index] = {};
             board.cells[index].row = i;
             board.cells[index].col = j;
-            board.cells[index].isMine = (Math.random() > difficulty);
+            board.cells[index].isMine = (Math.random() < difficulty);
             board.cells[index].hidden = true;
             board.cells[index].isMarked = false;
             index++
